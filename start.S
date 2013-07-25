@@ -17,33 +17,28 @@ _start:
 	#bl	uart_init
 	bl	ddr_init
 	
-	/*copy code to ram*/
+clear_bss:
+	ldr	r0, =bss_start
+	ldr	r1, =bss_end
+	ldr	r2, =0x0
+
+clbss_loop:
+	str	r1, [r0], #4
+	cmp	r0, r1
+	ble	clbss_loop
+
+#ifndef NAND_SPL
+	ldr	pc, =start_armboot
+#else
+/*
 	adr	r0, _start
 	ldr	r1, =_start
 	ldr	r2, =bss_start
 	sub	r2, r2, r1
 	cmp	r0, r1
-	beq	clean_bss
-	
-	bl	nand2ddr
-#	bl	test
-	cmp	r0, #0
-	beq	error
-
-clean_bss:
-	ldr	r0, =bss_start
-	ldr	r1, =bss_end
-	ldr	r2, =0x0
-	cmp	r0, r1
-	beq	after_copy
-bss_loop:
-	str	r1, [r0], #4
-	cmp	r0, r1
-	bne	bss_loop
-
-after_copy:
-	ldr	lr, =error
-	ldr	pc, =start_armboot
+*/	
+	b	nand_boot
+#endif
 
 error:
 	b	error

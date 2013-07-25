@@ -1,3 +1,5 @@
+#define NAND_SPL
+
 /*GPIO ADDRESS for OK6410*/
 #define GPACON  	(*((volatile unsigned long *)0x7f008000))
 #define GPADAT          (*((volatile unsigned long *)0x7f008004))

@@ -1,6 +1,8 @@
 #include "common.h"
 #include "setup.h"
 
+extern void uart_init(void);
+
 static struct tag *params;
 
 static int strlen(char *p)
