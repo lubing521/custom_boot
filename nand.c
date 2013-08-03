@@ -56,12 +56,7 @@ nand_read(unsigned int nand_start, unsigned int ddr_start, unsigned int len)
 
 		for (i = 0; i < 4096 && count < len; i++) {
 			data = SYSREG_R(NFDATA);
-			/*for the 1st 4*4K, just used 2K each*/
-			if(addr < 16384) {
-				if(i < 2048)
-					dest[count++] = data;
-			} else
-				dest[count++] = data;
+			dest[count++] = data;
 		}
 		addr += 4096;
 	}

@@ -10,6 +10,7 @@ SECTIONS
 	.text : {
 		start.o (.text)
 		lowlevel_init.o (.text)
+		ddr.o (.text)
 		*(.text)
 	}
 

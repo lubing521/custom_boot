@@ -48,8 +48,6 @@ reset:
 	ldr	r1, =_start
 	ldr	r2, =bss_start
 	sub	r2, r2, r1
-#	cmp	r0, r1
-#	beq	clean_bss
 	
 	bl	nand_read
 #	bl	led_run
@@ -57,16 +55,13 @@ reset:
 clean_bss:
 	ldr	r0, =bss_start
 	ldr	r1, =bss_end
-	ldr	r2, =0x0
-	cmp	r0, r1
-	beq	after_copy
+	mov	r2, #0x0
 bss_loop:
-	str	r1, [r0], #4
+	str	r2, [r0], #4
 	cmp	r0, r1
-	bne	bss_loop
+	ble	bss_loop
 
 after_copy:
-#	ldr	lr, =error
 	ldr	pc, =start_armboot
 
 /*

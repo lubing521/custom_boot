@@ -8,6 +8,7 @@ char getchar(void)
 	return URXH0;
 }
 */
+
 void putc(char c)
 {
 	while (SYSREG_R(UFSTAT0) & (1 << 14));

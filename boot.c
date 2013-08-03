@@ -1,4 +1,5 @@
 #include "common.h"
+#include "s3c6410.h"
 #include "setup.h"
 
 void puts(char *);
@@ -96,8 +97,6 @@ static void setup_end_tag(void)
         params->hdr.tag = ATAG_NONE;
         params->hdr.size = 0;
 }
-
-#include "s3c6410.h"
 
 static void uart_init(void)
 {
