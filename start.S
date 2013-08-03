@@ -3,7 +3,7 @@
 _start:
 	b	reset
 	ldr	pc, _undefined_instruction
-	ldr	pc, _sofrware_insterrupt
+	ldr	pc, _software_interrupt
 	ldr	pc, _prefetch_abort
 	ldr	pc, _data_abort
 	ldr	pc, _not_used
@@ -74,42 +74,28 @@ after_copy:
  */
         .align  5
 undefined_instruction:
-        get_bad_stack
-        bad_save_user_regs
-        bl      do_undefined_instruction
+        bl      undefined_instruction
 
         .align  5
 software_interrupt:
-        get_bad_stack_swi
-        bad_save_user_regs
-        bl      do_software_interrupt
+        bl      software_interrupt
 
         .align  5
 prefetch_abort:
-        get_bad_stack
-        bad_save_user_regs
-        bl      do_prefetch_abort
+        bl      prefetch_abort
 
         .align  5
 data_abort:
-        get_bad_stack
-        bad_save_user_regs
-        bl      do_data_abort
+        bl      data_abort
 
         .align  5
 not_used:
-        get_bad_stack
-        bad_save_user_regs
-        bl      do_not_used
+        bl      not_used
 
         .align  5
 irq:
-        get_bad_stack
-        bad_save_user_regs
-        bl      do_irq
+        bl      irq
 
         .align  5
 fiq:
-        get_bad_stack
-        bad_save_user_regs
-        bl      do_fiq
+        bl      fiq
