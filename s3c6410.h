@@ -1,3 +1,5 @@
+#define SYSREG_R(reg)		(*(volatile unsigned long *)reg)
+#define SYSREG_W(reg, val)	(*(volatile unsigned long *)reg = val)
 /*GPIO ADDRESS for OK6410*/
 #define GPACON  	(*((volatile unsigned long *)0x7f008000))
 #define GPADAT          (*((volatile unsigned long *)0x7f008004))

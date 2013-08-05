@@ -26,14 +26,19 @@ void uart_init(void)
 	UBRDIV0 = 35;
 	UDIVSLOT0 = 0X1;
 }
-/*
-char getchar(void)
+
+char getc(void)
 {
 	while ((UFSTAT0 & 0x7f) == 0);
 	
 	return URXH0;
 }
-*/
+
+char *gets(void)
+{
+
+}
+
 void putc(char c)
 {
 	while (UFSTAT0 & (1 << 14));

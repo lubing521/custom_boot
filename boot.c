@@ -2,6 +2,7 @@
 #include "setup.h"
 
 void uart_init(void);
+char getc(void);
 static struct tag *params;
 
 static int strlen(char *p)
@@ -94,13 +95,71 @@ static void setup_end_tag(void)
         params->hdr.size = 0;
 }
 
+char menu(void)
+{
+	puts("1. boot the kernel\n");
+	puts("2. write data to RTC\n");
+	puts("3. read data in RTC\n");
+	puts("4. info about baurd\n");
+	return (getc());
+}
+
+void rtc_write(char *data)
+{
+
+}
+
+char *rtc_read(void)
+{
+	char data[32];
+
+	return data;
+}
+
+void eeprom_write(char *data)
+{
+
+}
+
+char *eeprom_read(void)
+{	
+	char data[32];
+
+	return data;
+}
+
 int do_bootm_linux(void)
 {
+	char choice;
 	char *commandline = CMDLINE;
 	void (*kernel_entry)(int zero, int arch, unsigned int params);
 	volatile unsigned int *p = (volatile unsigned int *)LOAD_ADDR;
 	
 	uart_init();
+	i2c_init();
+	while (1) {
+		choice = menu();
+		switch (choice) {
+		case '1':
+			break;
+		case '2':
+			rtc_write(gets());
+			break;
+		case '3':
+			puts(rtc_read());
+			break;
+		case '4':
+			eeprom_write(gets());
+			break;
+		case '5':
+			puts(eeprom_read());
+			break;
+		default:
+			puts("wrong choice\n");
+			break;
+			
+		}
+	}
 	/*copy kernel to ram*/
 	puts("start copy kernel to ram......");
 	nand_read(0x100000, LOAD_ADDR, LOAD_SIZE);
