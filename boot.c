@@ -97,10 +97,13 @@ static void setup_end_tag(void)
 
 char menu(void)
 {
-	puts("1. boot the kernel\n");
-	puts("2. write data to RTC\n");
-	puts("3. read data in RTC\n");
-	puts("4. info about baurd\n");
+	puts("\n\r");
+	puts("\t1. boot the kernel\n\r");
+	puts("\t2. write data to RTC\n\r");
+	puts("\t3. read data in RTC\n\r");
+	puts("\t4. info about baurd\n\r");
+	puts("ok6410 # ");
+
 	return (getc());
 }
 
@@ -136,7 +139,7 @@ int do_bootm_linux(void)
 	volatile unsigned int *p = (volatile unsigned int *)LOAD_ADDR;
 	
 	uart_init();
-	i2c_init();
+	//i2c_init();
 	while (1) {
 		choice = menu();
 		switch (choice) {
